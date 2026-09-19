@@ -264,6 +264,7 @@ fn get_braille_code(code: &str) -> Option<&'static dyn BrailleCode> {
         "Vietnam" => &Vietnam,
         "CMU" => &Cmu,
         "Finnish" => &Finnish,
+        "Hungarian" => &Hungarian,
         "Russian" => &Russian,
         "Swedish" => &Swedish,
         "LaTeX" => &LaTeX,
@@ -277,6 +278,7 @@ struct Ueb;
 struct Vietnam;
 struct Cmu;
 struct Finnish;
+struct Hungarian;
 struct Russian;
 struct Swedish;
 #[allow(non_camel_case_types)]
@@ -284,6 +286,13 @@ struct LaTeX;
 struct AsciiMath;
 
 impl BrailleCode for Nemeth {
+    fn name(&self) -> &'static str { "Nemeth" }
+    fn cleanup(&self, pref_manager: Ref<PreferenceManager>, raw_braille: String) -> String { nemeth_cleanup(pref_manager, raw_braille) }
+    fn get_braille_chars(&self, node: Element, text_range: Option<Range<usize>>) -> Result<String> { BrailleChars::get_braille_nemeth_chars(node, text_range) }
+    fn highlight_first_indicator_len(&self, indicators: &str, first_ch: char) -> usize { i_start_nemeth(indicators, first_ch) }
+}
+
+impl BrailleCode for Hungarian {
     fn name(&self) -> &'static str { "Nemeth" }
     fn cleanup(&self, pref_manager: Ref<PreferenceManager>, raw_braille: String) -> String { nemeth_cleanup(pref_manager, raw_braille) }
     fn get_braille_chars(&self, node: Element, text_range: Option<Range<usize>>) -> Result<String> { BrailleChars::get_braille_nemeth_chars(node, text_range) }

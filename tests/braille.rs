@@ -12,6 +12,14 @@ mod braille {
         mod SRE_NemethBase;
         mod AataNemeth;
     }
+    mod Hungarian {
+        mod rules;
+        mod other;
+        mod chemistry;
+        mod SRE_Nemeth72;
+        mod SRE_NemethBase;
+        mod AataNemeth;
+    }
     mod UEB {
         mod iceb;
         mod other;
